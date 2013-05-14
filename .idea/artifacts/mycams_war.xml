@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="mycams:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="mycams-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="mycams:war exploded" />
+    </root>
+  </artifact>
+</component>
