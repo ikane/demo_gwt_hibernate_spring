@@ -54,7 +54,7 @@ public class UserDao implements IUserDao {
     @Override
     public List<User> getAllUsers() throws Exception {
         return HibernateUtil.getSessionFactory().openSession()
-                .createQuery("select usr from User as usr").list();
+                .createCriteria(User.class).list();
     }
 
     @Override

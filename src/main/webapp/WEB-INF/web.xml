@@ -19,7 +19,7 @@
 	<!--</welcome-file-list>-->
     <servlet>
         <servlet-name>userAction</servlet-name>
-        <servlet-class>org.spring4gwt.server.SpringGwtRemoteServiceServlet</servlet-class>
+        <servlet-class>cams.service.SpringAdapter</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>userAction</servlet-name>
