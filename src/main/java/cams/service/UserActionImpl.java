@@ -10,6 +10,7 @@ import org.apache.commons.logging.impl.Log4JLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
     @Autowired
     private IUserDao dao;
 
+    @Transactional
     public long createUser(String login, String phone) {
         try {
             logger.info("createUser start");
@@ -40,7 +42,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
             return 0;
         }
     }
-
+    @Transactional
     public void updateUser(int id, String login, String phone) {
         try {
             logger.info("updateUser start");
@@ -49,7 +51,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
             logger.error("updateUser", ex);
         }
     }
-
+    @Transactional
     public void deleteUser(int id) {
         try {
             logger.info("deleteUser start");
@@ -59,7 +61,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
 
         }
     }
-
+    @Transactional
     public List<? extends IUser> getAllUsers() {
         try {
             logger.info("allUser start");
@@ -75,6 +77,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
         }
     }
 
+    @Transactional
     public IUser getUsersByLogin(String login) {
         try {
             logger.info("getByLogin start");
@@ -85,6 +88,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
         }
     }
 
+    @Transactional
     public IUser getUsersById(int id) {
         try {
             return Utils.convert(getDao().getUsersById(id));
@@ -103,7 +107,7 @@ public class UserActionImpl extends RemoteServiceServlet implements UserAction {
      * @param key search key
      * @return list of ${@link cams.service.domain.User}
      */
-
+    @Transactional
     public List<? extends IUser> findByKey(String key) {
         try {
             List<User> list = getDao().findByKey(key);
