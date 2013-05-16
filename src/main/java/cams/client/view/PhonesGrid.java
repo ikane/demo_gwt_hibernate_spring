@@ -15,6 +15,9 @@ import cams.client.action.IUser;
 import cams.client.action.UserAction;
 import cams.client.action.UserActionAsync;
 import cams.client.dto.UserDto;
+import cams.client.events.AppUtils;
+import cams.client.events.UpdateEvent;
+import cams.client.events.UpdateEventHandler;
 import cams.client.listeners.UpdateGridData;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.data.BaseModel;
@@ -37,6 +40,7 @@ import com.extjs.gxt.ui.client.widget.layout.FlowLayout;
 import com.extjs.gxt.ui.client.widget.toolbar.SeparatorToolItem;
 import com.extjs.gxt.ui.client.widget.toolbar.ToolBar;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.NumberFormat;
 import com.google.gwt.user.client.Element;
@@ -47,7 +51,7 @@ public class PhonesGrid extends LayoutContainer {
     private final ListStore<UserDto> store = new ListStore<UserDto>();
     private final UserActionAsync userActionAsync = GWT.create(UserAction.class);
     private EditorGrid<UserDto> grid;
-
+    private PhonesGrid thisRef;
     public PhonesGrid() {
 
     }
@@ -89,14 +93,14 @@ public class PhonesGrid extends LayoutContainer {
 
         column = new ColumnConfig();
         column.setId("id");
-        column.setHeader("id");
+        column.setHeaderHtml("id");
         column.setWidth(130);
         configs.add(column);
 
         column = new ColumnConfig();
         column.setId("login");
 
-        column.setHeader("Login");
+        column.setHeaderHtml("Login");
         column.setAlignment(HorizontalAlignment.CENTER);
         column.setWidth(70);
         column.setEditor(new CellEditor(new TextField<String>()));
@@ -108,7 +112,7 @@ public class PhonesGrid extends LayoutContainer {
 
         column = new ColumnConfig();
         column.setId("phone");
-        column.setHeader("Phone");
+        column.setHeaderHtml("Phone");
         column.setAlignment(HorizontalAlignment.CENTER);
         column.setWidth(95);
         column.setEditor(new CellEditor(new TextField<String>()));
@@ -173,6 +177,15 @@ public class PhonesGrid extends LayoutContainer {
         cp.setButtonAlign(HorizontalAlignment.CENTER);
 
         add(cp);
+        thisRef=this;
+        AppUtils.EVENT_BUS.addHandler(UpdateEvent.TYPE,new UpdateEventHandler() {
+            @Override
+            public void update(UpdateEvent event) {
+                MessageBox box=new MessageBox();
+                box.setMessage("User added to grid");
+                box.show();
+            }
+        });
     }
 
 }

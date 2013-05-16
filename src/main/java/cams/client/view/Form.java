@@ -12,6 +12,8 @@ package cams.client.view;
 import cams.client.action.UserAction;
 import cams.client.action.UserActionAsync;
 import cams.client.dto.UserDto;
+import cams.client.events.AppUtils;
+import cams.client.events.UpdateEvent;
 import com.extjs.gxt.ui.client.Style.HorizontalAlignment;
 import com.extjs.gxt.ui.client.core.El;
 import com.extjs.gxt.ui.client.core.XDOM;
@@ -25,6 +27,9 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.extjs.gxt.ui.client.widget.layout.FormData;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
@@ -35,6 +40,7 @@ public class Form extends LayoutContainer {
     private TextField<String> login;
     private TextField<String> phone;
     private final UserActionAsync userActionAsync = GWT.create(UserAction.class);
+
 
     @Override
     protected void onRender(Element parent, int index) {
@@ -96,7 +102,7 @@ public class Form extends LayoutContainer {
 
                     @Override
                     public void onSuccess(Long aLong) {
-                     vp.fireEvent(Events.Refresh);
+                        AppUtils.EVENT_BUS.fireEvent(new UpdateEvent());
                     }
                 });
             }
