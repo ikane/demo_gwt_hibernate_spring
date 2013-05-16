@@ -59,7 +59,7 @@ public class UserDao implements IUserDao {
 
     @Override
     public User getUsersByLogin(String login) throws Exception {
-        List<User> usrs = HibernateUtil.getSessionFactory().openSession()
+        List<User> usrs = this.hibernateTemplate.getSessionFactory().openSession()
                 .createQuery("select usr from User as usr where usr.login=:login").setString("login", login).list();
         if (usrs.size()>0)
             return usrs.get(0);
