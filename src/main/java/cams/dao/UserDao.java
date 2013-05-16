@@ -69,7 +69,7 @@ public class UserDao implements IUserDao {
 
     @Override
     public User getUsersById(int id) throws Exception {
-        return (User)HibernateUtil.getSessionFactory().openSession().get(User.class,id);
+        return (User)this.hibernateTemplate.get(User.class,id);
     }
 
 
@@ -84,8 +84,7 @@ public class UserDao implements IUserDao {
 
     @Override
     public List<User> findByKey(String key) throws Exception {
-        return HibernateUtil.getSessionFactory().openSession()
-                .createQuery("select usr from User as usr where usr.login like %:keyparam% or " +
+        return this.hibernateTemplate.getSessionFactory().openSession().createQuery("select usr from User as usr where usr.login like %:keyparam% or " +
                         "usr.phone like %:keyparam%").setString("keyparam",key).list();
     }
 
