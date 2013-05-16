@@ -24,6 +24,36 @@
     </properties>
     <repositories>
         <repository>
+            <id>central</id>
+            <name>Maven Repository Switchboard</name>
+            <layout>default</layout>
+            <url>http://repo1.maven.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>java.net3</id>
+            <url>http://download.java.net/maven/2</url>
+        </repository>
+        <repository>
+            <id>codehausSnapshots</id>
+            <name>Codehaus Snapshots</name>
+            <releases>
+                <enabled>false</enabled>
+                <updatePolicy>always</updatePolicy>
+                <checksumPolicy>warn</checksumPolicy>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>never</updatePolicy>
+                <checksumPolicy>fail</checksumPolicy>
+            </snapshots>
+            <url>http://snapshots.maven.codehaus.org/maven2</url>
+            <layout>default</layout>
+        </repository>
+
+        <repository>
             <id>codehaus-maven-repo</id>
             <name>Codehaus repo</name>
             <url>http://repository.codehaus.org/org/codehaus/mojo/</url>
@@ -38,23 +68,10 @@
             <name>Codehaus repo</name>
             <url>http://snapshots.repository.codehaus.org/</url>
         </repository>
-        <repository>
-            <id>central</id>
-            <name>Maven Repository Switchboard</name>
-            <layout>default</layout>
-            <url>http://repo1.maven.org/maven2</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
         <!--<repository>-->
-            <!--<id>java.net</id>-->
-            <!--<url>http://download.java.net/maven/2</url>-->
+        <!--<id>java.net</id>-->
+        <!--<url>http://download.java.net/maven/2</url>-->
         <!--</repository>-->
-        <repository>
-            <id>java.net3</id>
-            <url>http://download.java.net/maven/3</url>
-        </repository>
     </repositories>
     <dependencies>
         <!--<dependency>-->
@@ -147,21 +164,26 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate</artifactId>
-            <version>3.2.1.ga</version>
+            <version>3.2.6.ga</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.6</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-annotations</artifactId>
-            <version>3.2.1.ga</version>
+            <version>3.4.0.GA</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.2.1.ga</version>
+            <version>3.4.0.GA</version>
             <type>jar</type>
             <scope>compile</scope>
         </dependency>

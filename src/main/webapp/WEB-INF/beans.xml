@@ -12,12 +12,10 @@
 
     <context:component-scan base-package="cams" />
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
-        <property name="configLocation" ><value>classpath:hibernate.cfg.xml</value></property>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
     </bean>
     <bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory" />
-        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <!--<bean id="pageDao" class="cams.dao.UserDao">-->
         <!--<property name="hibernateTemplate">-->
